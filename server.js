@@ -10,6 +10,12 @@ const timeout = (ms) => {
 };
 
 fastify.get("/:second", async (request, reply) => {
+  if (Number(request.params.second) > 30 || Number(request.params.second) < 0) {
+    return {
+      code: 500,
+      reason: "not allow to be < 30 or > 0",
+    };
+  }
   if (request.params.second) {
     await timeout(Number(request.params.second) * 1000);
   } else {
