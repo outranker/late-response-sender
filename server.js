@@ -1,7 +1,10 @@
 const fastify = require("fastify")({
   logger: false,
 });
-
+fastify.register(require("fastify-rate-limit"), {
+  max: 10,
+  timeWindow: 1000,
+});
 const timeout = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
