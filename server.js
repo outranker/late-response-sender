@@ -9,6 +9,28 @@ const timeout = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
+const send_request = async () => {
+  try {
+    const abc = await axios.get("http://127.0.0.1:3010/v1/test");
+  } catch (error) {
+    console.log(error);
+  }
+  return;
+};
+fastify.get("/", async (request, reply) => {
+  setInterval(() => {
+    console.log("sending request ...");
+    new Promise((resolve, reject) => {
+      send_request();
+      resolve();
+    });
+  }, 4000);
+
+  return {
+    hello: "world",
+  };
+});
+
 fastify.get("/:second", async (request, reply) => {
   if (Number(request.params.second) > 30 || Number(request.params.second) < 0) {
     return {
