@@ -19,16 +19,8 @@ const send_request = async () => {
   return;
 };
 fastify.get("/", async (request, reply) => {
-  setInterval(() => {
-    new Promise((resolve, reject) => {
-      // send_request();
-      resolve();
-    });
-  }, 4000);
-
   return {
     hello: "world",
-    elapsedTime: 4 + " seconds",
   };
 });
 fastify.get("/code/:code", async (request, reply) => {
