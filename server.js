@@ -29,9 +29,17 @@ fastify.get("/", async (request, reply) => {
 
   return {
     hello: "world",
+    elapsedTime: 4 + " seconds",
   };
 });
+fastify.get("/code/:code", async (request, reply) => {
+  let code = Number(request.params.code) || 200;
 
+  return reply.code(code).send({
+    hello: "world",
+    resultCode: `status code: ${code}`,
+  });
+});
 fastify.get("/:second", async (request, reply) => {
   if (Number(request.params.second) > 30 || Number(request.params.second) < 0) {
     return {
