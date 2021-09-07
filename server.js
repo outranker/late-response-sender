@@ -1,6 +1,7 @@
 const fastify = require("fastify")({
   logger: false,
 });
+const axios = require("axios");
 fastify.register(require("fastify-rate-limit"), {
   max: 10,
   timeWindow: 1000,
@@ -18,13 +19,13 @@ const send_request = async () => {
   return;
 };
 fastify.get("/", async (request, reply) => {
-  setInterval(() => {
+  //setInterval(() => {
     console.log("sending request ...");
-    new Promise((resolve, reject) => {
-      send_request();
-      resolve();
-    });
-  }, 4000);
+   // new Promise((resolve, reject) => {
+   //   send_request();
+    //  resolve();
+   // });
+ // }, 4000);
 
   return {
     hello: "world",
